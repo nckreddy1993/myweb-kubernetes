@@ -10,7 +10,7 @@ pipeline{
     stages{
         stage("Git Checkout"){
             steps{
-                git credentialsId: 'javahome2', url: 'https://github.com/nckreddy1993/myweb.git'
+                git credentialsId: 'GIT_CRED', url: 'https://github.com/nckreddy1993/myweb-kubernetes.git'
             }
         }
         stage("Maven Build"){
@@ -23,15 +23,15 @@ pipeline{
             steps{
                   nexusArtifactUploader artifacts: [
                        [
-                            artifactId: 'myweb', 
+                            artifactId: 'myweb-kubernetes', 
                             classifier: '', 
-                            file: "target/myweb-8.2.0.war", 
+                            file: "target/myweb-kubernetes-8.2.0.war", 
                             type: 'war'
                        ]
                   ], 
                   credentialsId: 'nexus3', 
                   groupId: 'in.javahome', 
-                  nexusUrl: '172.31.37.194:8081', 
+                  nexusUrl: '172.31.16.237:8081', 
                   nexusVersion: 'nexus3', 
                   protocol: 'http', 
                   repository: 'sample-releases', 
