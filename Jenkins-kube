@@ -31,7 +31,7 @@ pipeline{
                   ], 
                   credentialsId: 'nexus3', 
                   groupId: 'in.javahome', 
-                  nexusUrl: '172.31.24.25:8081', 
+                  nexusUrl: '172.31.23.56:8081', 
                   nexusVersion: 'nexus3', 
                   protocol: 'http', 
                   repository: 'sample-releases', 
@@ -45,8 +45,8 @@ pipeline{
          }
         stage('Push Docker Image'){
              steps{
-                  withCredentials([string(credentialsId: 'DOCKER_HUB_CREDENTIALS', variable: 'DOCKER_HUB_CREDENTIALS')]) {
-                      sh "docker login -u chandradev24 -p ${DOCKER_HUB_CREDENTIALS}"
+                  withCredentials([string(credentialsId: 'DOCKER_HUB_CREDENTIAL', variable: 'DOCKER_HUB_CREDENTIALS')]) {
+                      sh "docker login -u chandradev24 -p ${DOCKER_HUB_CREDENTIAL}"
             }
             sh 'docker push chandradev24/spring-boot-mongo'
         }
